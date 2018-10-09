@@ -21,7 +21,7 @@ This article describes how Office 365 mitigates against phishing attacks that us
   
 This article also describes why this change is being made, how customers can prepare for this change, how to view messages that will be affected, how to report on messages, how to mitigate false positives, as well as how senders to Microsoft should prepare for this change.
   
-Microsoft's anti-spoofing technology is initially deployed to its Office 365 Advanced Threat Protection (ATP) and E5 customers. However, because of the way all of its filters learn from each other, non-ATP customers and even Outlook.com users may also be affected.
+Microsoft's anti-spoofing technology was initially deployed to its Office 365 Advanced Threat Protection (ATP) and E5 customers. However, as of October, 2018 the protection has now been extended to the Exchange Online Protection customers as well. Additionally, because of the way all of our filters learn from each other, Outlook.com users may also be affected.
   
 ## How spoofing is used in phishing attacks
 
@@ -170,7 +170,7 @@ Authentication-Results: spf=none (sender IP is 1.2.3.4)
 From: sender @ example.com
 To: receiver @ contoso.com
 ```
-After anti-spoofing, if you are an Advanced Threat Protection or E5 customer, the compauth value is stamped (non-ATP and non-E5 customers are not affected):
+After anti-spoofing, if you are an Exchange Online Protection, Advanced Threat Protection or E5 customer, the compauth value is stamped:
   
 ```
 Authentication-Results: spf=none (sender IP is 1.2.3.4)
@@ -404,7 +404,7 @@ This feature is currently under development. As more details are defined, this p
   
 ### Understanding how spam, phishing, and advanced phishing detections are combined
 
-Exchange Online customers - both ATP and non-ATP - are able to specify the actions to take when the service identifies messages as malware, spam, high confidence spam, phishing, and bulk. However, with the introduction of new Anti-phishing policies for ATP customers, and the fact that a message may hit multiple detection types (e.g., malware, phishing, and user impersonation), there may be some confusion as to which policy applies. 
+Exchange Online customers - both ATP and non-ATP - are able to specify the actions to take when the service identifies messages as malware, spam, high confidence spam, phishing, and bulk. With the ATP Anti-phishing policies for ATP customers, and the Anti-phishing policies for EOP customers, and the fact that a message may hit multiple detection types (e.g., malware, phishing, and user impersonation), there may be some confusion as to which policy applies. 
   
 In general, the policy applied to a message is identified in the X-Forefront-Antispam-Report header in the CAT (Category) property. 
   
@@ -413,7 +413,7 @@ In general, the policy applied to a message is identified in the X-Forefront-Ant
 |1  <br/> |Malware  <br/> |MALW  <br/> |[Malware policy](https://technet.microsoft.com/en-us/library/jj200745%28v=exchg.150%29.aspx) <br/> |All customers﻿  <br/> |
 |2  <br/> |Phishing  <br/> |PHSH  <br/> |[Hosted content filter policy](https://technet.microsoft.com/library/jj200684%28v=exchg.150%29.aspx) <br/> |All customers  <br/> |
 |3  <br/> |High confidence spam  <br/> |HSPM  <br/> |[Hosted content filter policy](https://technet.microsoft.com/library/jj200684%28v=exchg.150%29.aspx) <br/> |All customers  <br/> |
-|4  <br/> |Spoofing  <br/> |SPOOF  <br/> |[Anti-phishing policy](https://go.microsoft.com/fwlink/?linkid=864553),          [Spoof intelligence﻿](https://support.office.com/article/Learn-more-about-spoof-intelligence-978c3173-3578-4286-aaf4-8a10951978bf) <br/> |ATP only  <br/> |
+|4  <br/> |Spoofing  <br/> |SPOOF  <br/> |[Anti-phishing policy](https://go.microsoft.com/fwlink/?linkid=864553),          [Spoof intelligence﻿](https://support.office.com/article/Learn-more-about-spoof-intelligence-978c3173-3578-4286-aaf4-8a10951978bf) <br/> |All customers  <br/> |
 |5  <br/> |Spam  <br/> |SPM  <br/> |[Hosted content filter policy](https://technet.microsoft.com/library/jj200684%28v=exchg.150%29.aspx) <br/> |All customers  <br/> |
 |6  <br/> |Bulk  <br/> |BULK  <br/> |[Hosted content filter policy](https://technet.microsoft.com/library/jj200684%28v=exchg.150%29.aspx) <br/> |All customers  <br/> |
 |7  <br/> |Domain Impersonation  <br/> |DIMP  <br/> |[Anti-phishing policy](https://go.microsoft.com/fwlink/?linkid=864553) <br/> |ATP only  <br/> |
@@ -679,7 +679,7 @@ Microsoft itself first adopted this feature several weeks before deploying it to
   
 ### Will Microsoft bring this feature to Outlook.com and non-Advanced Threat Protection customers of Office 365?
 
-Anti-spoofing protection will be initially rolled out to ATP/E5 customers, and may in the future be released to its other users. However, if it does, there may be some capabilities that are not applied such as reporting and custom overrides.
+Anti-spoofing protection was initially rolled out to ATP/E5 customers, and as of October 2018 is rolling out to EOP customers as well. It may in the future be released to outlook.com. However, if it does, there may be some capabilities that are not applied such as reporting and custom overrides.
   
 ### How can I report spam or non-spam messages back to Microsoft?
 
